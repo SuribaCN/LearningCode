@@ -1,0 +1,2 @@
+C:\Users\Suriba\source\repos\SERVER\SERVER\Debug\SERVER.exe
+C:\Users\Suriba\source\repos\SERVER\SERVER\Debug\SERVER.pdb
