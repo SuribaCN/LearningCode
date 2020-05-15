@@ -1,7 +1,7 @@
 ﻿  源.cpp
-C:\Users\Suriba\source\repos\Project2\Project2\源.cpp(97,33): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Users\Suriba\source\repos\Project2\Project2\源.cpp(112,58): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Users\Suriba\source\repos\Project2\Project2\源.cpp(151,42): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Users\Suriba\source\repos\Project2\Project2\源.cpp(169,48): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-C:\Users\Suriba\source\repos\Project2\Project2\源.cpp(189,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  Project2.vcxproj -> C:\Users\Suriba\source\repos\Project2\Debug\Project2.exe
+C:\Users\Suriba\source\repos\ping\Project2\源.cpp(97,33): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\Suriba\source\repos\ping\Project2\源.cpp(112,58): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\Suriba\source\repos\ping\Project2\源.cpp(151,42): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\Suriba\source\repos\ping\Project2\源.cpp(169,48): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\Suriba\source\repos\ping\Project2\源.cpp(189,5): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Project2.vcxproj -> C:\Users\Suriba\source\repos\ping\Debug\Project2.exe

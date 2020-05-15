@@ -188,23 +188,33 @@ int main(int argc, char* argv[])
     int recvlen = 20;
     scanf("%s", netip);
     // IpHeader recv_buf;
-    while (i < 4) {
-        if (setup_for_ping(netip, s, dest)) {
-            cerr << "destip not in proper form, exit";
-            return -1;
-        }
-        init_ping_packet((IcmpHeader*)sendbuf, 20, 1000);
-        // ICMP头长度以及数据加起来为20
-        send_ping(s, dest, (IcmpHeader*)sendbuf, 20);
-        recv_ping(s, dest, (IpHeader*)recv_buf, recvlen);
-        decode_reply((IpHeader*)recv_buf, recvlen, &dest);
-        i++;
-    } 
+ 
     cout << endl<<argv[1]<<endl;
-    if (*argv[1] == 'n')
-    {
-        cout << "nnnnnnnnnnn";
+    int n = 1;
+    int looptime = 4;
+    while (n < argc) {
+        if (*argv[n] == 'n')
+        {
+            looptime = atoi(argv[n + 1]);
+        }
+        cout << "loop:" << looptime << endl;
+        int u = 0;
+        while (u < looptime)
+        {
+            if (setup_for_ping(netip, s, dest)) {
+                cerr << "destip not in proper form, exit";
+                return -1;
+            }
+            init_ping_packet((IcmpHeader*)sendbuf, 20, 1000);
+            // ICMP头长度以及数据加起来为20
+            send_ping(s, dest, (IcmpHeader*)sendbuf, 20);
+            recv_ping(s, dest, (IpHeader*)recv_buf, recvlen);
+            decode_reply((IpHeader*)recv_buf, recvlen, &dest);
+            u++;
+        }
+
+
+        n = n + 2;
     }
-    cout << "wtf";
     getchar();
 }
