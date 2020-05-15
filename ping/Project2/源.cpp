@@ -111,6 +111,7 @@ int send_ping(SOCKET sd, const sockaddr_in& dest, IcmpHeader* send_buf, int pack
     // 发送send_buf缓冲区中的报文
     cout << "Sending " << packet_size << " bytes to " << inet_ntoa(dest.sin_addr) << "..." << flush;
     int bwrote = sendto(sd, (char*)send_buf, packet_size, 0, (sockaddr*)&dest, sizeof(dest));
+ 
     if (bwrote == SOCKET_ERROR) {
         cerr << "send failed: " << WSAGetLastError() << endl;
         return -1;
@@ -126,7 +127,7 @@ int recv_ping(SOCKET sd, sockaddr_in& source, IpHeader* recv_buf, int& packet_si
 {
     // 等待Ping回复
     int fromlen = sizeof(source);
-    int bread = recvfrom(sd, (char*)recv_buf, 200, 0, (sockaddr*)&source, &fromlen);
+    int bread = recvfrom(sd, (char*)recv_buf, 65535, 0, (sockaddr*)&source, &fromlen);
     if (bread == SOCKET_ERROR) {
         cerr << "read failed: ";
         if (WSAGetLastError() == WSAEMSGSIZE)
@@ -179,42 +180,41 @@ int decode_reply(IpHeader* reply, int bytes, sockaddr_in* from)
 int main(int argc, char* argv[])
 {
     int i = 0;
-    char netip[16];
+    char *netip;
     SOCKET s;
     sockaddr_in dest;
     // IcmpHeader icmp_hdr; // sizeof(IcmpHeader = 12)
-    char sendbuf[200];  // sendbuf包括ICMP头，还有留出写数据的部分
-    char recv_buf[200]; // sendbuf要接收IP头以及ICMP包，所以要留出足够的空间
+    char sendbuf[65500];  // sendbuf包括ICMP头，还有留出写数据的部分
+    char recv_buf[65500]; // sendbuf要接收IP头以及ICMP包，所以要留出足够的空间
     int recvlen = 20;
-    scanf("%s", netip);
+    netip = argv[1];
     // IpHeader recv_buf;
- 
-    cout << endl<<argv[1]<<endl;
-    int n = 1;
-    int looptime = 4;
+    int n = 2, looptime = 4, packagesize = 32;
     while (n < argc) {
-        if (*argv[n] == 'n')
+        if (strcmp(argv[n], "-n") == 0)
         {
             looptime = atoi(argv[n + 1]);
         }
-        cout << "loop:" << looptime << endl;
-        int u = 0;
-        while (u < looptime)
+        if (strcmp(argv[n], "-l") == 0)
         {
-            if (setup_for_ping(netip, s, dest)) {
-                cerr << "destip not in proper form, exit";
-                return -1;
-            }
-            init_ping_packet((IcmpHeader*)sendbuf, 20, 1000);
-            // ICMP头长度以及数据加起来为20
-            send_ping(s, dest, (IcmpHeader*)sendbuf, 20);
-            recv_ping(s, dest, (IpHeader*)recv_buf, recvlen);
-            decode_reply((IpHeader*)recv_buf, recvlen, &dest);
-            u++;
+            packagesize = atoi(argv[n + 1]);
         }
-
-
         n = n + 2;
     }
-    getchar();
+    int u = 0;
+    while (u < looptime)
+    {
+        if (setup_for_ping(netip, s, dest)) {
+            cerr << "destip not in proper form, exit";
+            return -1;
+        }
+        init_ping_packet((IcmpHeader*)sendbuf, 20, 1000);
+        // ICMP头长度以及数据加起来为20
+        send_ping(s, dest, (IcmpHeader*)sendbuf, packagesize);
+        recv_ping(s, dest, (IpHeader*)recv_buf, recvlen);
+        decode_reply((IpHeader*)recv_buf, recvlen, &dest);
+        u++;
+    }
+
+
 }
