@@ -1,0 +1,2 @@
+playstation4 controller 2800 720
+playstation3 controller 1200 360
