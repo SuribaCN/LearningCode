@@ -3,6 +3,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QtWidgets>
+#include<getin.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -27,6 +28,14 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_6_clicked();
+
+    void on_tableWidget_itemActivated(QTableWidgetItem *item);
+
+    void on_tableWidget_activated(const QModelIndex &index);
+
+    void on_radioButton_clicked(bool checked);
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;

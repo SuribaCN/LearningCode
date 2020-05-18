@@ -9,10 +9,13 @@
 #include<QMessageBox>
 #include<QFileDialog>
 #include<QTextStream>
+#include<getin.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    QVector<Product> vec;
     ui->setupUi(this);
     labCellIndex = new QLabel("当前单元坐标格",this);
     labCellIndex ->setMinimumWidth(250);
@@ -23,6 +26,36 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->addWidget(labCellIndex);
     ui->statusbar->addWidget(labCellType);
     ui->statusbar->addWidget(labStudID);
+    //奇偶行深浅色
+     ui->tableWidget->setAlternatingRowColors(1);
+     //读取数据
+     QFile file("aa.txt");
+     if(file.open(QIODevice::ReadOnly))
+     {
+         QTextStream stream(&file);
+         while(!stream.atEnd())
+         {
+             QStringList list = stream.readLine().split(QRegExp("\\s+"));
+             Product pro(list.at(0), list.at(1), static_cast<QString>(list.at(2)).toInt(), static_cast<QString>(list.at(3)).toShort());
+             vec.push_back(pro);
+
+         }
+     }
+     ui->tableWidget->setRowCount(2);     //设置行数为2
+        ui->tableWidget->setColumnCount(4);   //设置列数为4
+
+        QStringList header;
+        header << "Name" << "Flow" << "Distance" << "Time";
+        ui->tableWidget->setHorizontalHeaderLabels(header);
+
+
+        for(int i = 0; i < vec.count(); i++)
+        {
+            ui->tableWidget->setItem(i,0,new QTableWidgetItem(vec[i].getName()));
+            ui->tableWidget->setItem(i,1,new QTableWidgetItem(vec[i].getClass()));
+            ui->tableWidget->setItem(i,2,new QTableWidgetItem(vec[i].getPrice()));
+            ui->tableWidget->setItem(i,3,new QTableWidgetItem(vec[i].getService()));
+        }
 }
 
 MainWindow::~MainWindow()
@@ -33,6 +66,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+
+
      //设置表头
         QTableWidgetItem    *headerItem;
         QStringList headerText;
@@ -75,6 +110,8 @@ void MainWindow::on_pushButton_2_clicked()
             isParty =!isParty;
         }
 }
+
+
 
 void MainWindow::createItemsARow(int rowNo,QString Name,QString Sex,QDate birth,QString Nation,bool isPM,int score)
 { //为一行的单元格创建 Items
@@ -173,3 +210,10 @@ void MainWindow::on_pushButton_6_clicked()
     int curRow=ui->tableWidget->currentRow();//当前行号
     ui->tableWidget->removeRow(curRow); //删除当前行及其items
 }
+
+void MainWindow::on_tableWidget_activated(const QModelIndex &index)
+{
+    ui->tableWidget->setAlternatingRowColors(1);
+}
+
+

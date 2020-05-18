@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include<getin.h>
+#include<qstring.h>
+#include <vector>
 
 int main(int argc, char *argv[])
 {
