@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     //奇偶行深浅色
      ui->tableWidget->setAlternatingRowColors(1);
      //读取数据
-     QFile file("aa.txt");
+     QFile file("C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\aa.txt");
      if(file.open(QIODevice::ReadOnly))
      {
          QTextStream stream(&file);
@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->tableWidget->setColumnCount(4);   //设置列数为4
 
         QStringList header;
-        header << "Name" << "Flow" << "Distance" << "Time";
+        header << "Name" << "Class" << "Price" << "Service";
         ui->tableWidget->setHorizontalHeaderLabels(header);
 
 

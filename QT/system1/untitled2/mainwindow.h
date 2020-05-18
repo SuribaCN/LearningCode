@@ -48,4 +48,17 @@ private:
 };
 class QLineEdit;
 class QDialog;
+class HeatUser
+{
+public:
+
+
+
+
+private:
+    char Name[30];
+    float Flow;
+    float Distance;
+    short Time;
+};
 #endif // MAINWINDOW_H
