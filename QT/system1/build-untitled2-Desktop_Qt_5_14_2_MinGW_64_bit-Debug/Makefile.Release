@@ -1569,7 +1569,6 @@ release/mainwindow.o: ../untitled2/mainwindow.cpp ../untitled2/mainwindow.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QApplication \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QFrame \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QGridLayout \
-		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QMenu \
@@ -1578,10 +1577,13 @@ release/mainwindow.o: ../untitled2/mainwindow.cpp ../untitled2/mainwindow.h \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QStatusBar \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QTableWidget \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QDialog \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
 		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtCore/QTextStream \
+		C:/Qt/Qt5.14.2/5.14.2/mingw73_64/include/QtWidgets/QTextEdit \
+		../untitled2/tool.h \
 		../untitled2/customer.h \
 		../untitled2/customer_service.h \
 		../untitled2/service_history.h

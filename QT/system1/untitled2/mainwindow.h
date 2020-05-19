@@ -37,6 +37,12 @@ private slots:
 
     void on_pushButton_7_clicked();
 
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_toolButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     enum CellType{ctName=1000,ctSex,ctBirth,ctNation,ctPartyM,ctScore};
@@ -46,6 +52,7 @@ private:
     QLabel *labStudID;
     void createItemsARow(int eowNo,QString Name,QString Sex,QDate birth,QString Nation,bool isPM,int score);
 };
+
 class QLineEdit;
 class QDialog;
 

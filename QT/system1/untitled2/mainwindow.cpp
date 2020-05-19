@@ -6,6 +6,8 @@
 #include <QLineEdit>
 #include<QPushButton>
 #include<QTextStream>
+#include <QTextEdit>
+#include<tool.h>
 //商品信息管理
 #include<getin.h>
 //顾客信息管理
@@ -14,6 +16,11 @@
 #include<customer_service.h>
 //维修历史管理
 #include<service_history.h>
+
+#define AddressOfStandardMessage "C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\StandardMessage.txt"
+#define AddressOfCustomerMessage "C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\CustomerMessage.txt"
+#define AddressOfServiceMessage "C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\ServiceMessage.txt"
+#define AddressOfServiceHitoryMessage "C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\ServiceHistory.txt"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,8 +48,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
+//全局变量传递输出文件地址
+QString TargetAddress=0;
 
 void MainWindow::on_tableWidget_cellChanged(int row, int column)
 {
@@ -60,13 +67,13 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
      int ID=item->data(Qt::UserRole).toInt();//读取用户自定义数据
      labStudID->setText(QString::asprintf("ID：%d",ID));
 }
-
+//插入行
 void MainWindow::on_pushButton_5_clicked()
 {
     int curRow=ui->tableWidget->currentRow();//当前行号
         ui->tableWidget->insertRow(curRow); //插入一行
 }
-
+//添加行
 void MainWindow::on_pushButton_4_clicked()
 {
 
@@ -75,23 +82,19 @@ void MainWindow::on_pushButton_4_clicked()
         ui->tableWidget->insertRow(curRow);//在表格尾部添加一行
 
 }
-
+//删除行
 void MainWindow::on_pushButton_6_clicked()
 {
     int curRow=ui->tableWidget->currentRow();//当前行号
     ui->tableWidget->removeRow(curRow); //删除当前行及其items
 }
 
-void MainWindow::on_tableWidget_activated(const QModelIndex &index)
-{
-    ui->tableWidget->setAlternatingRowColors(1);
-}
 //基本信息管理
 void MainWindow::on_pushButton_clicked()
 {
     QVector<Product> vec;
-    QFile file("C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\StandardMessage.txt");
-    if(file.open(QIODevice::ReadOnly))
+    QFile file(AddressOfStandardMessage);
+    if(file.open(QIODevice::ReadWrite))
     {
         QTextStream stream(&file);
         while(!stream.atEnd())
@@ -117,16 +120,17 @@ void MainWindow::on_pushButton_clicked()
            ui->tableWidget->setItem(i,2,new QTableWidgetItem(vec[i].getPrice()));
            ui->tableWidget->setItem(i,3,new QTableWidgetItem(vec[i].getService()));
        }
-
+       file.close();
+     TargetAddress=AddressOfStandardMessage;
 }
 //顾客信息管理
 void MainWindow::on_pushButton_2_clicked()
 {
 
     QVector<Customer> vec;
-    QFile file("C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\CustomerMessage.txt");
+    QFile file(AddressOfCustomerMessage);
 
-    if(file.open(QIODevice::ReadOnly))
+    if(file.open(QIODevice::ReadWrite))
     {
         QTextStream stream(&file);
         while(!stream.atEnd())
@@ -153,15 +157,14 @@ void MainWindow::on_pushButton_2_clicked()
            ui->tableWidget->setItem(i,3,new QTableWidgetItem(vec[i].getSellout_Time()));
            ui->tableWidget->setItem(i,4,new QTableWidgetItem(vec[i].getService_Upto_time()));
        }
-
+     file.close();
+     TargetAddress=AddressOfCustomerMessage;
 }
-
 //保修信息管理
-
 void MainWindow::on_pushButton_7_clicked()
 {
     QVector<Customer_Service> vec;
-    QFile file("C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\ServiceMessage.txt");
+    QFile file(AddressOfServiceMessage);
     if(file.open(QIODevice::ReadOnly))
     {
         QTextStream stream(&file);
@@ -189,21 +192,21 @@ void MainWindow::on_pushButton_7_clicked()
            ui->tableWidget->setItem(i,2,new QTableWidgetItem(vec[i].getPredict_Service_Time()));
            ui->tableWidget->setItem(i,3,new QTableWidgetItem(vec[i].getService_Information()));
        }
+       file.close();
+       TargetAddress=AddressOfServiceMessage;
 }
-
 //维修历史管理
-
 void MainWindow::on_pushButton_3_clicked()
 {
     QVector<Service_History> vec;
-    QFile file("C:\\Users\\Suriba\\source\\repos\\QT\\system1\\untitled2\\debug\\ServiceHistory.txt");
+    QFile file(AddressOfServiceHitoryMessage);
     if(file.open(QIODevice::ReadOnly))
     {
         QTextStream stream(&file);
-        stream.setCodec("GBK");
+        stream.setCodec("GB2312");
         while(!stream.atEnd())
         {
-            QStringList list = stream.readLine().split(QRegExp("\\s+"));
+            QStringList list = stream.readLine().split(QRegExp("\\s+"));//split()通过指定分隔符对字符串进行分片，QRegExp字符串模式匹配，\\s+任意空白分隔符
             Service_History service_history(list.at(0), list.at(1),list.at(2), list.at(3));
             vec.push_back(service_history);
 
@@ -224,5 +227,35 @@ void MainWindow::on_pushButton_3_clicked()
            ui->tableWidget->setItem(i,2,new QTableWidgetItem(vec[i].getService_Result()));
            ui->tableWidget->setItem(i,3,new QTableWidgetItem(vec[i].getService_Price()));
        }
+        file.close();
+        TargetAddress=AddressOfServiceHitoryMessage;
+}
+//保存更改
+void MainWindow::on_pushButton_8_clicked()
+{
+
+    QFile file_data(TargetAddress);
+        file_data.open(QIODevice::WriteOnly );
+        file_data.close();
+        file_data.open(QIODevice::ReadWrite);
+        QString tabeDate[ui->tableWidget->rowCount()][ui->tableWidget->columnCount()];
+         QTextStream in(&file_data);
+        for(int i=0; i<ui->tableWidget->rowCount(); i++)
+        {
+            for(int j=0; j<ui->tableWidget->columnCount(); j++)
+            {
+               in<<( tabeDate[i][j] = ui->tableWidget->item(i, j)->text())<<" ";
+            }
+            in<<"\r\n";
+        }
+
+
+        file_data.close();
+
+
 
 }
+
+
+
+
