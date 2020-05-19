@@ -20,11 +20,15 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    customer.h \
+    customer_service.h \
     getin.h \
-    mainwindow.h
+    mainwindow.h \
+    service_history.h
 
 FORMS += \
     mainwindow.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

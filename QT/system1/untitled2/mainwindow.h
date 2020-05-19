@@ -29,13 +29,13 @@ private slots:
 
     void on_pushButton_6_clicked();
 
-    void on_tableWidget_itemActivated(QTableWidgetItem *item);
 
     void on_tableWidget_activated(const QModelIndex &index);
 
-    void on_radioButton_clicked(bool checked);
 
     void on_pushButton_3_clicked();
+
+    void on_pushButton_7_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -48,17 +48,5 @@ private:
 };
 class QLineEdit;
 class QDialog;
-class HeatUser
-{
-public:
 
-
-
-
-private:
-    char Name[30];
-    float Flow;
-    float Distance;
-    short Time;
-};
 #endif // MAINWINDOW_H

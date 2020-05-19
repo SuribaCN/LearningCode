@@ -40,7 +40,6 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_7;
-    QPushButton *pushButton_3;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -89,11 +88,11 @@ public:
         pushButton = new QPushButton(verticalLayoutWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         QFont font1;
-        font1.setFamily(QString::fromUtf8("\346\234\252\346\235\245\350\215\247\351\273\221 Normal"));
+        font1.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font1.setPointSize(10);
-        font1.setBold(true);
+        font1.setBold(false);
         font1.setUnderline(false);
-        font1.setWeight(75);
+        font1.setWeight(50);
         pushButton->setFont(font1);
 
         verticalLayout->addWidget(pushButton);
@@ -107,21 +106,13 @@ public:
         pushButton_7 = new QPushButton(verticalLayoutWidget);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
         QFont font2;
-        font2.setFamily(QString::fromUtf8("\346\234\252\346\235\245\350\215\247\351\273\221 Normal"));
+        font2.setFamily(QString::fromUtf8("\345\276\256\350\275\257\351\233\205\351\273\221"));
         font2.setPointSize(10);
-        font2.setBold(true);
-        font2.setWeight(75);
+        font2.setBold(false);
+        font2.setWeight(50);
         pushButton_7->setFont(font2);
 
         verticalLayout->addWidget(pushButton_7);
-
-        pushButton_3 = new QPushButton(verticalLayoutWidget);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        QFont font3;
-        font3.setPointSize(10);
-        pushButton_3->setFont(font3);
-
-        verticalLayout->addWidget(pushButton_3);
 
         verticalLayoutWidget_2 = new QWidget(centralwidget);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
@@ -197,7 +188,6 @@ public:
         pushButton->setText(QCoreApplication::translate("MainWindow", "\344\272\247\345\223\201\347\256\241\347\220\206", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "\351\241\276\345\256\242\347\256\241\347\220\206", nullptr));
         pushButton_7->setText(QCoreApplication::translate("MainWindow", "\346\212\245\344\277\256\347\256\241\347\220\206", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "\347\273\264\344\277\256\345\216\206\345\217\262", nullptr));
         pushButton_5->setText(QCoreApplication::translate("MainWindow", "\346\217\222\345\205\245\350\241\214", nullptr));
         pushButton_4->setText(QCoreApplication::translate("MainWindow", "\346\267\273\345\212\240\350\241\214", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", "\345\210\240\351\231\244\350\241\214", nullptr));
